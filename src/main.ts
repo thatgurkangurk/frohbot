@@ -1,15 +1,12 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { GatewayIntentBits } from "discord.js";
+import { ExtendedClient } from "./lib/client";
 
-const client = new Client({
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-	],
+const client = new ExtendedClient({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
-client.once("ready", () => {
-	console.log("ready");
-});
-
-client.login(Bun.env.TOKEN);
+client.start(Bun.env.TOKEN);

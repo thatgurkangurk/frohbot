@@ -7,11 +7,11 @@ FROM base AS deps
 RUN bun install --frozen-lockfile
 
 FROM base
-RUN addgroup --system --gid 1001 bun
+RUN addgroup --system --gid 1001 frohbot
 RUN adduser --system --uid 1001 frohbot
 ENV NODE_ENV production
 
-COPY --from=deps --chown=frohbot:bun /app/node_modules /app/node_modules
-COPY --chown=frohbot:bun ./src /app/src
+COPY --from=deps --chown=frohbot:frohbot /app/node_modules /app/node_modules
+COPY --chown=frohbot:frohbot ./src /app/src
 
 CMD [ "bun", "run", "./src/main.ts" ]
